@@ -15,6 +15,22 @@ void clean(){
     while((c = getchar()) != '\n' && c != EOF);
 }
 
+char validar(){
+    char resposta;
+    do
+    {
+        printf("Deseja realizar outra operacao? (s/n): ");
+        scanf("%c", &resposta);
+        clean();
+
+        if(resposta != 's' && resposta != 'S' && resposta != 'n' && resposta != 'N'){
+            printf("Erro: Digite apenas as letras 's' ou 'n'.\n");
+        }
+    }
+    while (resposta != 's' && resposta != 'S' && resposta != 'n' && resposta != 'N');
+    return resposta;
+}
+
 void base()
 {
     int op;
@@ -52,10 +68,12 @@ void base()
     case 1:
         entry(&n1, &n2);
         printf("Resultado: %.2f + %.2f = %.2f \n", n1, n2, (n1 + n2));
-        printf("Deseja realizar outra operacao? (s/n): ");
-        scanf(" %c", &outra);
+        
+        outra = validar();
+
         if (outra == 's' || outra == 'S')
         {
+            printf("\n");
             base();
         }
         else
@@ -66,11 +84,12 @@ void base()
     case 2:
         entry(&n1, &n2);
         printf("Resultado: %.2f - %.2f = %.2f\n", n1, n2, (n1 - n2));
-        printf("Deseja realizar outra operacao? (s/n): ");
-        scanf(" %c", &outra);
-        // printf("\n");
+        
+        outra = validar();
+
         if (outra == 's' || outra == 'S')
         {
+            printf("\n");
             base();
         }
         else
@@ -81,11 +100,12 @@ void base()
     case 3:
         entry(&n1, &n2);
         printf("Resultado: %.2f * %.2f = %.2f\n", n1, n2, (n1 * n2));
-        printf("Deseja realizar outra operacao? (s/n): ");
-        scanf(" %c", &outra);
-        // printf("\n");
+
+        outra = validar();
+
         if (outra == 's' || outra == 'S')
         {
+            printf("\n");
             base();
         }
         else
@@ -103,16 +123,17 @@ void base()
         {
             printf("Resultado: %.2f / %.2f = %.2f\n", n1, n2, (n1 / n2));
         }
-        printf("Deseja realizar outra operacao? (s/n):");
-        scanf(" %c", &outra);
-        // printf("\n");
+
+        outra = validar();
+
         if (outra == 's' || outra == 'S')
         {
+            printf("\n");
             base();
         }
         else
         {
-            printf("Obrigado por usar a calculadora! Até a próxima.\n");
+            printf("Obrigado por usar a calculadora! Ateh a proxima.\n");
         }
         break;
 
