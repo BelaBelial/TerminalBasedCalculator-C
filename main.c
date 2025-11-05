@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <ctype.h>
 
-void entry(int *num, int *num2)
+void entry(float *num, float *num2)
 {
     // int n1, n2;
     printf("Digite o primeiro numero: ");
-    scanf("%d", num);
+    scanf("%f", num);
     printf("Digite o segundo numero: ");
-    scanf("%d", num2);
+    scanf("%f", num2);
 }
 
 void clean(){
@@ -26,28 +26,34 @@ void base()
     printf("4. Divisao\n");
     printf("5. Sair\n");
     printf("Opcao: ");
-    scanf("%d", &op);
+    
 
-    int n1, n2;
-    char outra;
-
-    if (op > 5 || op < 0 || isalpha(op))
+    if (scanf("%d", &op) != 1)
     {
         clean();
         printf("Esta opcao nao eh valida.");
         base();
         return;
     }
-    // else
-    // {
+    clean();
+
+    float n1, n2;
+    char outra;
+
+    if(op > 5 || op < 1)
+    {
+        printf("Esta opcao nao eh valida.\n");
+        base(); // Recursão para opção inválida
+        return;
+    }
+
     switch (op)
     {
     case 1:
         entry(&n1, &n2);
-        printf("Resultado: %d + %d = %d \n", n1, n2, (n1 + n2));
+        printf("Resultado: %.2f + %.2f = %.2f \n", n1, n2, (n1 + n2));
         printf("Deseja realizar outra operacao? (s/n): ");
         scanf(" %c", &outra);
-        // printf("\n");
         if (outra == 's' || outra == 'S')
         {
             base();
@@ -59,7 +65,7 @@ void base()
         break;
     case 2:
         entry(&n1, &n2);
-        printf("Resultado: %d - %d = %d\n", n1, n2, (n1 - n2));
+        printf("Resultado: %.2f - %.2f = %.2f\n", n1, n2, (n1 - n2));
         printf("Deseja realizar outra operacao? (s/n): ");
         scanf(" %c", &outra);
         // printf("\n");
@@ -74,7 +80,7 @@ void base()
         break;
     case 3:
         entry(&n1, &n2);
-        printf("Resultado: %d * %d = %d\n", n1, n2, (n1 * n2));
+        printf("Resultado: %.2f * %.2f = %.2f\n", n1, n2, (n1 * n2));
         printf("Deseja realizar outra operacao? (s/n): ");
         scanf(" %c", &outra);
         // printf("\n");
@@ -91,18 +97,18 @@ void base()
         entry(&n1, &n2);
         if (n2 == 0)
         {
-            printf("Erro: Divisao por zero nao eh permitida.");
+            printf("Erro: Divisao por zero nao eh permitida.\n");
         }
         else
         {
-            printf("Resultado: %d / %d = %d\n", n1, n2, (n1 / n2));
+            printf("Resultado: %.2f / %.2f = %.2f\n", n1, n2, (n1 / n2));
         }
         printf("Deseja realizar outra operacao? (s/n):");
         scanf(" %c", &outra);
         // printf("\n");
         if (outra == 's' || outra == 'S')
         {
-            base(op);
+            base();
         }
         else
         {
@@ -111,13 +117,13 @@ void base()
         break;
 
     case 5:
-        printf("Obrigado por usar a calculadora! Até a próxima.\n");
+        printf("Obrigado por usar a calculadora! Ateh a proxima.\n");
+        break;
     }
 }
 
 int main()
 {
     base();
-
     return 0;
 }
